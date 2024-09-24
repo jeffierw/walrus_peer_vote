@@ -131,12 +131,11 @@ export default function Home() {
 
   useEffect(() => {
     if (!isLoading && rankList) {
+      
+      setVoteDataList([]);
       collectionIds.forEach(async (id) => {
-        const existingVoteData = voteDataList.find(voteData => voteData?.id.id === id);
-        if (!existingVoteData) {
-          const voteData = await getVoteList(id);
-          setVoteDataList((prev) => [...prev, voteData]);
-        }
+        const voteData = await getVoteList(id);
+        setVoteDataList((prev) => [...prev, voteData]);
       });
     }
   }, [isLoading, rankList]);

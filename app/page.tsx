@@ -81,7 +81,7 @@ export default function Home() {
               <li key={project.fields.id} className="bg-white shadow-md rounded-lg p-4 hover:shadow-lg transition-shadow duration-300 flex justify-between items-center">
                 <div className="flex items-center flex-grow">
                   <div>
-                    <h2 className="text-xl font-bold text-gray-800 mb-2">{project.fields.name}</h2>
+                    <h2 className="text-xl font-bold text-gray-800 mb-2">{project.fields.id}: {project.fields.name}</h2>
                     <p className="text-gray-600 mb-2">Votes: <span className="font-semibold">{project.fields.votes}</span></p>
                     <div className="flex space-x-4">
                       <a href={project.fields.github_url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 transition-colors duration-300">GitHub</a>

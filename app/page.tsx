@@ -18,6 +18,9 @@ interface Project {
 }
 
 interface VoteData {
+  id: {
+    id: string
+  },
   team: string;
   team_name: string;
   ballot: string[];
@@ -129,8 +132,11 @@ export default function Home() {
   useEffect(() => {
     if (!isLoading && rankList) {
       collectionIds.forEach(async (id) => {
-        const voteData = await getVoteList(id);
-        setVoteDataList((prev) => [...prev, voteData]);
+        const existingVoteData = voteDataList.find(voteData => voteData?.id.id === id);
+        if (!existingVoteData) {
+          const voteData = await getVoteList(id);
+          setVoteDataList((prev) => [...prev, voteData]);
+        }
       });
     }
   }, [isLoading, rankList]);
@@ -168,7 +174,7 @@ export default function Home() {
             <span>. </span>
             <span className="inline-block w-full">{countdown}</span>
           </div>
-          <div className="w-full max-w-2xl mb-12 grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="w-full max-w-4xl mb-12 grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <h2 className="text-2xl font-bold text-gray-800 mb-4">Part A</h2>
               <ul className="space-y-4">
